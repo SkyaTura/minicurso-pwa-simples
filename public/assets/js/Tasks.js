@@ -117,7 +117,6 @@ window.addEventListener('load', function() {
     createCard(text);
     saveTask(text);
     enableButtons(false);
-    notify(`Tarefa adicionada com sucesso: ${text}`);
   }
 
   /**
