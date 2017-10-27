@@ -2,9 +2,9 @@
   window.addEventListener('load', function() {
     /**
      * TODO:
-     * [ ] Verificar a disponibilidade da API de Service Worker
-     * [ ] Se disponível, registrar o Service Worker
-     * [ ] Exibir uma mensagem no console com os resultados da operação
+     * [X] Verificar a disponibilidade da API de Service Worker
+     * [X] Se disponível, registrar o Service Worker
+     * [X] Exibir uma mensagem no console com os resultados da operação
      *
      * Ajuda: https://developers.google.com/web/fundamentals/primers/service-workers/?hl=pt-br#registrar_um_service_worker
      */

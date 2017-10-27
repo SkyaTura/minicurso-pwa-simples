@@ -2,9 +2,17 @@ let CACHE_NAME = 'cache-v1';
 
 /**
  * TODO:
- * [ ] Crie uma lista com todos os arquivos a serem disponibilizados offline
+ * [X] Crie uma lista com todos os arquivos a serem disponibilizados offline
  */
-let urlsToCache = [];
+let urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/assets/css/main.css',
+  '/assets/css/normalize.css',
+  '/assets/js/ServiceWorker.js',
+  '/assets/js/Tasks.js'
+];
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
@@ -12,9 +20,9 @@ self.addEventListener('install', function(event) {
       .then(function(cache) {
         /**
          * TODO:
-         * [ ] Adicione a sua lista de arquivos em cache
+         * [X] Adicione a sua lista de arquivos em cache
          */
-        return cache.addAll(/* ... */);
+        return cache.addAll(urlsToCache);
       })
   );
 });
