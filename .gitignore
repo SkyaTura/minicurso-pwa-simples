@@ -1,0 +1,9 @@
+.idea/
+node_modules/
+.firebaserc
+.DS_Store
+.DS_Store?
+dist/
+deploy_tmp/
+*.zip
+package-lock.json

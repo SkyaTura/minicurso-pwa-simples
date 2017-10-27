@@ -1,0 +1,10 @@
+{
+  "name": "Minha Lista",
+  "short_name": "Minha Lista",
+  "start_url": "/index.html?pwa",
+  "display": "standalone",
+  "background_color": "#2196F3",
+  "theme_color": "#2196F3",
+  "description": "Um simples teste",
+  "orientation": "portrait"
+}

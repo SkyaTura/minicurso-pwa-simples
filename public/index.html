@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Metadados -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Antonio Eduardo (Skya Tura)">
+  <meta name="description" content="Projeto de exemplo introdutório">
+  <meta name="keywords" content="HTML,CSS,JavaScript,PWA">
+
+  <!-- Customização da página -->
+  <title>Minha Lista</title>
+  <!-- Cor da barra de tarefas (em navegadores compatíveis) -->
+  <meta name="theme-color" content="#2196F3">
+  <!-- Arquivo de manifesto para instalação do site como aplicativo -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Estilos -->
+  <style type="text/css">
+    /**
+     * OTIMIZAÇÃO DE CARREGAMENTO
+     *
+     *  Esse conjunto de estilos tem por finalidade priorizar o estilo dos principais elementos visuais da página,
+     * reduzindo o tempo que o usuário leva para ter retorno do conteúdo
+     */
+
+    :root {
+      /**
+       * Utilizamos este bloco para definir variáveis, permitindo que o tema do App seja customizado facilmente
+       */
+      --primary-color: #2196F3;
+      --shadow-depth-1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+    @media only screen and (min-width: 0) {
+      html {
+        font-size: 14px;
+      }
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Roboto, sans-serif;
+    }
+
+    /**
+     * TODO:
+     * [X] Priorizar as características básicas do conteúdo crítico de layout
+     * [X] Design diferenciado para dispositivos mobile
+     */
+    #app > header {
+      color: var(--primary-color);
+      background: white;
+
+      box-sizing: border-box;
+      line-height: 64px;
+      font-size: 14px;
+    }
+
+    .nav-wrapper, .nav-wrapper a {
+      height: 100%;
+      text-align: center;
+      font-size: 2.1rem;
+      color: inherit;
+    }
+
+    @media only screen and (min-width: 993px) {
+      #app > header {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: var(--shadow-depth-1);
+      }
+    }
+
+    /**
+     * TODO:
+     * [X] Exibir um spinner indicando o status de carregamento
+     * [X] Ocultar o conteúdo em carregamento e priorizar o estilo do layout
+     * [X] Criar uma classe que oculte elementos
+     */
+    #startup-spinner.loaded,
+    #startup-spinner:not(.loaded) + main,
+    .hidden {
+      display: none;
+    }
+
+    /**
+     * Spinner de carregamento
+     *
+     * Para utilizar basta remover os comentários do elemento #startup-spinner antes do bloco principal
+     */
+
+    #startup-spinner {
+      display: flex;
+      flex: 100%;
+      flex-direction: column;
+      align-content: center;
+      justify-content: space-around;
+      text-align: center;
+
+      font-size: 16px;
+      line-height: 16em;
+    }
+
+    #startup-spinner > div {
+      display: inline-block;
+      line-height: 1.2;
+      vertical-align: middle;
+    }
+
+    #startup-spinner svg {
+      -webkit-animation: rotate 2s linear infinite;
+      animation: rotate 2s linear infinite;
+      z-index: 2;
+    }
+
+    #startup-spinner svg circle {
+      stroke: var(--primary-color);
+      stroke-linecap: round;
+      -webkit-animation: dash 1.5s ease-in-out infinite;
+      animation: dash 1.5s ease-in-out infinite;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes rotate {
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 0em, 4em;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 4em, 0em;
+        stroke-dashoffset: -35;
+      }
+      100% {
+        stroke-dasharray: 0em, 4em;
+        stroke-dashoffset: -124;
+      }
+    }
+
+    @-webkit-keyframes dash {
+      0% {
+        stroke-dasharray: 0em, 4em;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 4em, 0em;
+        stroke-dashoffset: -35;
+      }
+      100% {
+        stroke-dasharray: 0em, 4em;
+        stroke-dashoffset: -124;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Cabeçalho do layout -->
+  <header class="z-depth-1">
+    <div class="nav-wrapper"><a class="brand-logo center">Minha Lista</a></div>
+  </header>
+
+  <!-- Spinner que indica o carregamento da página -->
+  <div id="startup-spinner">
+    <div>
+      <svg width="50" height="50" viewbox="0 0 44 44">
+        <circle cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <div class="container">
+      <!-- Seção para a criação de novas tarefas -->
+      <div id="new-task" class="card">
+        <!-- Input de texto -->
+        <div class="input-field">
+          <input type="text" id="input-description" required>
+          <label for="input-description">Descrição da tarefa</label>
+        </div>
+        <!-- Botões de ação -->
+        <div class="input-buttons">
+          <div>
+            <button id="btn-add" class="primary-bg" disabled>
+              <svg viewbox="0 0 40 40">
+                <path class="svg-add" d="M 20,10 L 20,30 M 30,20 L 10,20"></path>
+              </svg>
+            </button>
+            <button id="btn-discard" disabled>
+              <svg viewbox="0 0 40 40">
+                <path class="svg-discard" d="M 14,14 L 26,26 M 26,14 L 14,26"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Divisor de seções -->
+      <hr>
+      <!-- Container para as tarefas a serem adicionadas -->
+      <div id="list"></div>
+      <div id="empty-list" class="card">
+        Você não tem nenhuma tarefa 😃
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- [HTML5] Template para cards de tarefas -->
+<template id="task-template">
+  <div class="card">
+    <div class="check-task">
+      <input type="checkbox">
+      <label></label>
+    </div>
+  </div>
+</template>
+
+<!-- Carregamento de recursos externos -->
+<link rel="stylesheet" href="assets/css/normalize.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<script type="text/javascript" src="assets/js/ServiceWorker.js"></script>
+<script type="text/javascript" src="assets/js/Tasks.js"></script>
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+    /**
+     * TODO:
+     * [ ] Remover o spinner de carregamento, permitindo que o bloco principal seja exibido.
+     */
+    document.querySelector('#startup-spinner').className = 'loaded';
+  });
+</script>
+</body>
+</html>
